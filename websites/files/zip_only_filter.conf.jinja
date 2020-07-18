@@ -1,0 +1,10 @@
+{% include 'addons/lib/managed_file_header.jinja' %}
+
+# Rules are evaluated in order (from top to bottom) - rsync applies the first rule that matches.
+
+# Includes all directories.
++ */
+# Anchor the zip wildcard rule to the beginning of a filename part at any directory depth.
++ **/*.zip
+# Exclude everything that isn't explicitly included by the preceding rules.
+- *
