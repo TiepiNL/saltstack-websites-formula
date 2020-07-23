@@ -5,7 +5,7 @@
 
 # Verify that the site_backup_root_directory directory is present or exists.
 websites_backup_root_directory_exists:
-  file.exists:
+  file.directory:
     - name: {{site_backup_root_directory}}
 
     # Loop through the present sites in pillar.
