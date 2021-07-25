@@ -12,21 +12,15 @@ include:
 {%- for present_site_name, site_details in salt['pillar.get']('websites:sites:present', {}).items() %}
 
 # @TODO: get defaults from defaults.yaml
-{%- set chown_user = site_details.get('user', 'www-data') %}
-{%- set chown_group = site_details.get('group', 'www-data') %}
 {%- set dir_mode = site_details.get('dir_mode', '755') %}
 {%- set file_mode = site_details.get('file_mode', '644') %}
 
 # Set the right permissions and ownership.
 {{web_root_directory}}/{{present_site_name}}:
   file.directory:
-    - user: {{chown_user}}
-    - group: {{chown_group}}
     - dir_mode: {{dir_mode}}
     - file_mode: {{file_mode}}
     - recurse:
-      - user
-      - group
       - mode
     # follow symlinks and check the permissions of the directory/file
     # to which the symlink points.
